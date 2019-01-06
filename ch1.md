@@ -1,8 +1,8 @@
-####1.1. Why is Java still changing?
-#####1.1.1. Java’s place in the programming language ecosystem
+#### 1.1. Why is Java still changing?
+##### 1.1.1. Java’s place in the programming language ecosystem
 * 在面临大数据问题时，java的并发处理并不友好，为了适应新问题，Java有必要改进
 
-#####1.1.2. Stream processing
+##### 1.1.2. Stream processing
 * Java 8 里的stream好像Linux系统的命令，可以通过管道把操作串联起来，并且并行的执行
 * 也像数据库查询的子查询
 * 与多线程相比，代价小得多
