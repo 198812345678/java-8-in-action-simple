@@ -12,3 +12,7 @@
 
 ##### 1.1.4. Parallelism and shared mutable data
 * stream的并行处理不是并发安全的，所以传入stream的逻辑不能共享可变数据，不能使用同步机制控制并发
+
+##### 1.1.5. Java needs to evolve
+* 与传统面向对象相比，java 8的主要变化是，传统面向对象总是专注与修改已有对象的数据，而java 8则更像是函数式编程
+* java8的风格是要做什么是主要内容，和怎么实现是分离的（TODO ?）
