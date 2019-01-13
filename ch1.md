@@ -28,3 +28,28 @@
 * 在过滤目录下隐藏文件的case中，java8之前，判断是否隐藏文件要传入FileFilter对象，会回调isHidden方法判断是否隐藏文件
 * java8中，直接传入isHidden方法，而不用包装在FileFilter对象中
 * 所以在java8中有了方法引用的概念，就是可以通过引用直接访问方法
+
+##### 1.2.2. Passing code: an example
+* 定义一个方法，直接传入方法
+
+##### 1.2.3. From passing methods to lambdas
+* 把lambda表达式当作参数传入，连方法定义都省掉了
+* 只用到一次的逻辑就不用定义方法了，但是复杂逻辑不适合用lambda表达式
+
+#### 1.3. Streams
+* java8之前，处理集合要考虑怎么循环之类的控制语句
+* java8 Stream中，不用再考虑如何控制（循环之类）
+* 需要处理巨大数据集的场景，Stream能方便的并行利用计算机的多核
+
+##### 1.3.1. Multithreading is difficult
+* 编写正确的多线程代码比较困难
+* Collection重点在于存储和访问数据，Stream重点在于处理数据（聚合、过滤），而且Stream提倡并行处理
+* java8的并行处理基本没有成本，前提是个元素之间无关联的，不能有共享可变对象
+
+#### 1.4. Default methods
+* default方法主要是解决java8中在老接口中新增方法带来的问题
+* 老接口新增方法，避免所有实现类都要实现对应新增方法
+
+#### 1.5. Other good ideas from functional programming
+* Optional<T>用来处理没有值的场景，避免用null造成空指针
+* patter match （switch 语句中使用复杂对象？ TODO）
