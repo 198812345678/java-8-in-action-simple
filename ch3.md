@@ -11,8 +11,8 @@
 
 ##### 3.2.2. Function descriptor
 * 能用functional interface实现类的地方就能用lambda表达式，要求签名与functional interface的那个抽象方法匹配 @see com.will.simple.java.eight.in.action.ch3.LambdaTest.test1
-* functional interface中的那个抽象方法叫做function descriptor
-* function descriptor应该不是一种语法，他只是描述那个抽象方法的一种方式，就是那个抽象方法签名, 入参类型...-> 返回类型
+* functional interface中的那个抽象方法的描述叫做function descriptor(方法签名)
+* function descriptor应该不是一种语法，他只是描述那个抽象方法的一种方式，就是那个抽象方法签名, 入参类型...-> 返回类型，包括异常声明
 * lambda不仅可以用在参数，也可以用在返回值 @see com.will.simple.java.eight.in.action.ch3.LambdaTest.buildFounctionalInterface
 * @FunctionalInterface注解在functional interface上, 如果不是functional interface会报错 @see com.will.simple.java.eight.in.action.NotFounctionalInterface
 
@@ -29,3 +29,19 @@
 * java.util.function.Consumer 要对某个对象本身做某些操作，没有返回值时使用
 * java.util.function.Function 把某个对象转化成另一个对象时使用
 * 这些基本也是在execute around pattern中使用 @see com.will.simple.java.eight.in.action.ch3.LambdaTest.test3
+
+#### 3.5. Type checking, type inference, and restrictions
+##### 3.5.1. Type checking
+* lambda表达式的类型是根据上下文推断出来的
+* target type：在此处实际需要的类型
+* lambda表达式当作方法入参时的类型检查过程：
+* * 根据被调用方法的入参找到target type
+* * 是否是functional interface，并找到那个抽象方法
+* * 检查lambda表达式（的签名）和抽象方法的签名是否匹配，包括异常
+
+##### 3.5.2. Same lambda, different functional interfaces
+* 因为泛型和void，所以同一个lambda表达式可以和多个functional interfaced 的function descriptor匹配，也就可以用在多个场景
+
+##### 3.5.3. Type inference
+* 因为有target type，所以lambda表达式的入参类型可以忽略（要和target type匹配）
+* 并不是所有场景都合适使用这个机制
