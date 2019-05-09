@@ -102,6 +102,28 @@ public class LambdaTest {
         staticL = 0;
     }
 
+    @Test
+    public void test6() {
+        long l = 0;
+        doSomething(new FounctionalInterface() {
+            @Override
+            public void doSomething(Integer i) {
+                System.out.println(i);
+            }
+        }, 1);
+//        l = 9;
+
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                System.out.println(l);
+            }
+        };
+
+//        l = 0;
+
+    }
+
     private void doSomething(FounctionalInterface founctionalInterface, Integer i) {
         founctionalInterface.doSomething(i);
     }

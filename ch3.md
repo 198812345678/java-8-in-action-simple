@@ -48,4 +48,8 @@
 
 ##### 3.5.4. Using local variables
 * capturing lambdas: 使用lambda表达式定义参数之外的变量
+* lambda表达式如果要使用表达式外的局部变量，这个局部变量必须是final或者只赋值一次，实例变量和static变量则没有这个限制, 匿名内部类也有这个限制
+@see com.will.simple.java.eight.in.action.ch3.LambdaTest.test5
+@see com.will.simple.java.eight.in.action.ch3.LambdaTest.test6
+* 这个限制的原因是，局部变量属于线程，在线程的栈中，如果通过lambda表达式或者匿名内部类在其他线程中使用了这个局部变量，其实是使用的一个拷贝，当拥有这个变量的线程将这个变量销毁后，拷贝依然存在，这使得
 * 
