@@ -2,6 +2,7 @@ package com.will.simple.java.eight.in.action.ch3;
 
 import com.will.simple.java.eight.in.action.FounctionalInterface;
 import com.will.simple.java.eight.in.action.NotFounctionalInterface;
+import com.will.simple.java.eight.in.action.ch1.Apple;
 import org.assertj.core.util.Lists;
 import org.junit.Test;
 
@@ -12,6 +13,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class LambdaTest {
+
+    private long instanceL = 0L;
+    private static long staticL = 0L;
 
     @Test
     public void test() {
@@ -75,6 +79,27 @@ public class LambdaTest {
         objProcess.useConsumer(list, (Integer i) -> {});
         List<String> strings = objProcess.useFuntion(list, (Integer i) -> String.valueOf(i));
 
+    }
+
+    @Test
+    public void test4() {
+        doSomething(i -> System.out.println(i.intValue()), 1);
+    }
+
+    @Test
+    public void test5() {
+        long l = 0L;
+//        l = 1L;
+        doSomething(i -> System.out.println(l), 1);
+//        l = 0;
+
+        /**instance variables*/
+        doSomething(i -> System.out.println(instanceL), 1);
+        instanceL = 9;
+
+        /**static variables*/
+        doSomething(i -> System.out.println(staticL), 1);
+        staticL = 0;
     }
 
     private void doSomething(FounctionalInterface founctionalInterface, Integer i) {

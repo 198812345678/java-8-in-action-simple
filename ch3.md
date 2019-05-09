@@ -43,5 +43,9 @@
 * 因为泛型和void，所以同一个lambda表达式可以和多个functional interfaced 的function descriptor匹配，也就可以用在多个场景
 
 ##### 3.5.3. Type inference
-* 因为有target type，所以lambda表达式的入参类型可以忽略（要和target type匹配）
+* 因为有target type，编译器知道什么类型是正确的，所以lambda表达式的入参类型可以忽略（要和target type匹配）@see com.will.simple.java.eight.in.action.ch3.LambdaTest.test4
 * 并不是所有场景都合适使用这个机制
+
+##### 3.5.4. Using local variables
+* capturing lambdas: 使用lambda表达式定义参数之外的变量
+* 
