@@ -124,6 +124,21 @@ public class LambdaTest {
 
     }
 
+    @Test
+    public void test7() {
+        doAdd(new NotFounctionalInterface() {
+            @Override
+            public void doSomething(Integer i) {
+
+            }
+
+            @Override
+            public void add(Integer i, Integer ii) {
+
+            }
+        }, 1, 2);
+    }
+
     private void doSomething(FounctionalInterface founctionalInterface, Integer i) {
         founctionalInterface.doSomething(i);
     }

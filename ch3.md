@@ -3,6 +3,7 @@
 * lambda表达式与method类似，有参数、返回、异常，但不需要像method依赖于某一个class，因此被成为function
 * lambda表达式可以像变量一样传递 @see com.will.simple.java.eight.in.action.ch3.LambdaTest.test
 * body中如果要用{}，包在里面的要是完整的语句，表达式不能用{} @see com.will.simple.java.eight.in.action.ch3.LambdaTest.test
+* body中要么是完整的一块方法块{xxx;xxx;}, 要么只是return后面的内容（不带return）
 
 #### 3.2. Where and how to use lambdas
 
@@ -51,5 +52,6 @@
 * lambda表达式如果要使用表达式外的局部变量，这个局部变量必须是final或者只赋值一次，实例变量和static变量则没有这个限制, 匿名内部类也有这个限制
 @see com.will.simple.java.eight.in.action.ch3.LambdaTest.test5
 @see com.will.simple.java.eight.in.action.ch3.LambdaTest.test6
-* 这个限制的原因是，局部变量属于线程，在线程的栈中，如果通过lambda表达式或者匿名内部类在其他线程中使用了这个局部变量，其实是使用的一个拷贝，当拥有这个变量的线程将这个变量销毁后，拷贝依然存在，这使得
+* 这个限制的原因是，局部变量属于线程，在线程的栈中，lambda和匿名内部类有机会将变量带到另一个线程，如果通过lambda表达式或者匿名内部类在其他线程中使用了这个局部变量，其实是使用的一个拷贝，
+当拥有这个变量的线程将这个变量销毁后，拷贝依然存在，这使得对这个变量的修改是无意义的
 * 
