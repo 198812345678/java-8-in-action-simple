@@ -54,4 +54,22 @@
 @see com.will.simple.java.eight.in.action.ch3.LambdaTest.test6
 * 这个限制的原因是，局部变量属于线程，在线程的栈中，lambda和匿名内部类有机会将变量带到另一个线程，如果通过lambda表达式或者匿名内部类在其他线程中使用了这个局部变量，其实是使用的一个拷贝，
 当拥有这个变量的线程将这个变量销毁后，拷贝依然存在，这使得对这个变量的修改是无意义的
-* 
+
+
+#### 3.6 方法引用
+##### 3.6.1 管中窥豹 
+* 如果一个lambda表达式的body只是调用某个类的一个方法，这时可以使用方法引用
+* 静态方法的方法引用：body中调用的方法是某个类的静态方法 
+* lambda参数实例的方法引用：body中调用的方法是某个参数的方法，并且其他参数是这个方法的入参(就是说lambda的所有入参都要在方法引用中用到？) @see com.will.simple.java.eight.in.action.ch3.LambdaTest.test11
+* 外部对象的方法引用：body中调用的方法是表达式外部对象的某个方法，并且表达式的入参是这个方法的入参
+* @see com.will.simple.java.eight.in.action.ch3.LambdaTest.test11
+
+##### 3.6.2 构造函数引用 
+* 当一个lambda表达式的body只是要new一个对象的时候，就可以使用构造函数引用 @see com.will.simple.java.eight.in.action.ch3.LambdaTest.test13
+
+#### 3.8 复合Lambda表达式的有用方法 
+* 复合就是叠加行为，因为函数式接口可以有默认方法，所以可以有多种行为可以叠加
+* 比较器复合：实现多维度比较
+* 谓词复合：组合与或非操作，运算优先级从左到右，不同于||、&&等操作符
+* 函数复合：类似数学里的f(g(x)) g(f(x))
+* @see com.will.simple.java.eight.in.action.ch3.LambdaTest.test14

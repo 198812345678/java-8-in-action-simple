@@ -10,12 +10,21 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
+import java.util.function.BiFunction;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 public class LambdaTest {
 
     private long instanceL = 0L;
     private static long staticL = 0L;
+
+    public static int fdd(int i) {
+        return i;
+    }
 
     @Test
     public void test() {
@@ -137,6 +146,94 @@ public class LambdaTest {
 
             }
         }, 1, 2);
+    }
+
+    @Test
+    public void test8() {
+        Consumer<Integer> consumer = (i) -> System.out.println(i);
+        consumer.accept(4);
+        System.out.println(consumer);
+    }
+
+    @Test
+    public void test9() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                //do something
+            }
+        }).start();
+
+        new Thread(() -> {/**do something*/}).start();
+    }
+
+    @Test
+    public void test10() {
+        final Integer locI = 0;
+        Function<Integer, Boolean> function1 = (Integer i) -> i == locI;
+
+        Integer locII = 0;
+        Function<Integer, Boolean> function2 = (Integer i) -> i == locII;
+
+        Integer locIII = 0;
+        Function<Integer, Boolean> function3 = (Integer i) -> i == locIII;
+//        locIII = 9;
+
+
+        Predicate<Integer> predicate = (Integer i) -> i == null;
+
+        Consumer<List<Integer>> consumer = (List<Integer> list) -> list.add(2);
+    }
+
+    @Test
+    public void test11() {
+        BiFunction<Integer, String, Integer> biFunction = (i, s) -> i.intValue();
+
+//        biFunction = Integer::intValue;
+//        biFunction = Integer::valueOf;
+
+        Function<Integer, Integer> function = (i) -> i.intValue();
+        function = Integer::valueOf;//①
+        function = Integer::intValue;//②
+
+        Integer ii = 0;
+        function = (i) -> ii.compareTo(i);
+        function = ii::compareTo;//③
+        function = Integer::new;
+    }
+
+    @Test
+    public void test12() {
+        Comparator.comparing((Integer i) -> i.intValue());
+    }
+
+    @Test
+    public void test13() {
+        Function<Integer, Integer> f = Integer::new;
+        Function<Integer, Integer> f2 = (i) -> new Integer(i);
+        Consumer<Integer> consumer = (Integer i) -> i += f.apply(i);
+    }
+
+    @Test
+    public void test14() {
+        List<Integer> list = Arrays.asList(1, 2, 3);
+        list.sort(Comparator.comparing((Integer i) -> i).reversed().thenComparing((Integer i) -> i * -1));
+
+        List<Apple> apples = Arrays.asList();
+        apples.sort(Comparator.comparing(Apple::getWeight).thenComparing(Apple::getColor));
+
+        System.out.println(list);
+
+        Predicate<Integer> predicate = (i) -> i == 1;
+        predicate = predicate.or((i) -> i == 2).and((i) -> i == 2);
+        predicate.test(1);//false
+        predicate.test(2);//true
+
+
+        Function<Integer, Integer> f = x -> x + 1;
+        Function<Integer, Integer> g = x -> x * 2;
+        f.compose(g).apply(1);//f(g(1)) = 3
+        f.andThen(g).apply(1);//g(f(1)) = 4
     }
 
     private void doSomething(FounctionalInterface founctionalInterface, Integer i) {
