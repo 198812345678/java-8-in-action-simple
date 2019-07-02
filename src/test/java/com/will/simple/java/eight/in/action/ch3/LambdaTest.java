@@ -1,13 +1,14 @@
 package com.will.simple.java.eight.in.action.ch3;
 
+import com.alibaba.fastjson.JSON;
+import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
 import com.will.simple.java.eight.in.action.FounctionalInterface;
 import com.will.simple.java.eight.in.action.NotFounctionalInterface;
 import com.will.simple.java.eight.in.action.ch1.Apple;
 import org.assertj.core.util.Lists;
 import org.junit.Test;
 
-import java.io.BufferedReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -192,14 +193,28 @@ public class LambdaTest {
 //        biFunction = Integer::intValue;
 //        biFunction = Integer::valueOf;
 
-        Function<Integer, Integer> function = (i) -> i.intValue();
+        Function<Integer, Integer> function = (i) -> Integer.valueOf(i);
         function = Integer::valueOf;//①
+
+        function = (i) -> i.intValue();
         function = Integer::intValue;//②
 
         Integer ii = 0;
         function = (i) -> ii.compareTo(i);
         function = ii::compareTo;//③
-        function = Integer::new;
+
+        function = (i) -> new Integer(i);
+        function = Integer::new;//④
+
+        BiFunction<String, String, String> biFunction1 = (String s1, String s2) -> {this.test();return s2.concat(s1);};
+        System.out.println(biFunction1.apply("s1", "s2"));
+        biFunction1 = String::concat;
+        System.out.println(biFunction1.apply("s1", "s2"));
+
+        BiFunction<String, Integer, String> biFunction2 = (s, i) -> s.substring(i);
+        System.out.println(biFunction2.apply("s2", 1));
+        biFunction2 = String::substring;
+
     }
 
     @Test
@@ -236,6 +251,57 @@ public class LambdaTest {
         f.andThen(g).apply(1);//g(f(1)) = 4
     }
 
+    @Test
+    public void test15() {
+        Function<String, String> function = new Function<String, String>() {
+            @Override
+            public String apply(String s) {
+                this.andThen(null);
+                return null;
+            }
+        };
+
+
+        List<String> listS = new ArrayList<>();
+        List<Integer> listI = new ArrayList<>();
+        System.out.println(listS.getClass() == listI.getClass());
+
+        Predicate<String> pS = (s) -> true;
+        Predicate<Integer> pI = (i) -> true;
+        System.out.println(pS.getClass() == pI.getClass());
+
+        Predicate pS2 = new Predicate<String>() {
+            @Override
+            public boolean test(String s) {
+                return false;
+            }
+        };
+
+        Predicate pI2 = new Predicate<Integer>() {
+            @Override
+            public boolean test(Integer integer) {
+                return false;
+            }
+        };
+        System.out.println(pS2.getClass() == pI2.getClass());
+
+
+    }
+
+    @Test
+    public void test16() throws IOException {
+        ByteArrayOutputStream bao = new ByteArrayOutputStream();
+        ObjectOutputStream oos = new ObjectOutputStream(bao);
+
+        Consumer<String> consumer = s -> System.out.println(s);
+        oos.writeObject(consumer);
+        consumer.accept("s");
+
+        Consumer<String> consumer2 = System.out::println;
+        oos.writeObject(consumer2);
+        consumer2.accept("s");
+    }
+
     private void doSomething(FounctionalInterface founctionalInterface, Integer i) {
         founctionalInterface.doSomething(i);
     }
@@ -251,4 +317,20 @@ public class LambdaTest {
     private FounctionalInterface buildFounctionalInterface() {
         return Integer -> System.out.println();
     }
+
+    private void print(List<String> list) {
+
+    }
+
+//    private void print(List<Integer> list) {
+//
+//    }
+
+    private void print(Predicate<String> predicate) {
+
+    }
+
+//    private void print(Predicate<Integer> predicate) {
+//
+//    }
 }

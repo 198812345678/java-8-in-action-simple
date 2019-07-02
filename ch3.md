@@ -60,7 +60,7 @@
 ##### 3.6.1 管中窥豹 
 * 如果一个lambda表达式的body只是调用某个类的一个方法，这时可以使用方法引用
 * 静态方法的方法引用：body中调用的方法是某个类的静态方法 
-* lambda参数实例的方法引用：body中调用的方法是某个参数的方法，并且其他参数是这个方法的入参(就是说lambda的所有入参都要在方法引用中用到？) @see com.will.simple.java.eight.in.action.ch3.LambdaTest.test11
+* lambda参数实例的方法引用：body中调用的方法是第一个参数的方法，并且其他参数是这个方法的入参(就是说lambda的所有入参都要在方法引用中用到？) @see com.will.simple.java.eight.in.action.ch3.LambdaTest.test11
 * 外部对象的方法引用：body中调用的方法是表达式外部对象的某个方法，并且表达式的入参是这个方法的入参
 * @see com.will.simple.java.eight.in.action.ch3.LambdaTest.test11
 
