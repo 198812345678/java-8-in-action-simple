@@ -50,7 +50,7 @@ public class ParallelSumTest {
 
     }
 
-    public long measureSumPerf(Function<Long, Long> adder, long n) {
+    public static long measureSumPerf(Function<Long, Long> adder, long n) {
         long fastest = Long.MAX_VALUE;
         for (int i = 0; i < 10; i++) {
             long start = System.nanoTime();
